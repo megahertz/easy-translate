@@ -1,0 +1,45 @@
+{
+  "name": "easy-translate",
+  "version": "0.0.1",
+  "description": "A very simple translation library for node.js",
+  "main": "./index.js",
+  "scripts": {
+    "test": "npm run jshint && npm run jscs && npm run tslint && npm run mocha",
+    "mocha": "mocha index.spec.js",
+    "jscs": "jscs .",
+    "jshint": "jshint --exclude ./node_modules,./langs . --verbose",
+    "tslint": "tslint easy-translate.d.ts"
+  },
+  "typings": "./easy-translate.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/megahertz/easy-translate.git"
+  },
+  "files": [
+    "index.js",
+    "langs",
+    "easy-translate.d.ts"
+  ],
+  "keywords": [
+    "node",
+    "translate",
+    "i18n",
+    "lanuguage"
+  ],
+  "author": "Alexey Prokhorov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/megahertz/easy-translate/issues"
+  },
+  "homepage": "https://github.com/megahertz/easy-translate#readme",
+  "devDependencies": {
+    "chai": "*",
+    "jscs": "*",
+    "jshint": "*",
+    "jshint-reporter-jscs": "*",
+    "mocha": "*",
+    "rewire": "*",
+    "tslint": "*",
+    "typescript": "*"
+  }
+}
