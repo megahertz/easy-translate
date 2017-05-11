@@ -31,7 +31,7 @@ function t(message, params) {
   }
 
   if (arguments.length > 2) {
-    const args = Array.prototype.splice.call(arguments, 1);
+    var args = Array.prototype.splice.call(arguments, 1);
     message = applyParams(message, args);
   } else if (typeof params === 'object') {
     message = applyParams(message, params);
