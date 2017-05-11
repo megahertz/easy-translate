@@ -34,10 +34,10 @@ console.log(t('The current lanugage is {n}.', t.language());
 ```
 
 ### Load translations
+```js
 // Load built-in plural rules for specified language
 var plural = require('easy-translate/langs/ru.js');
 
-```js
 t.load({
   language: 'ru',
   translations: {
