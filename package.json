@@ -1,14 +1,14 @@
 {
   "name": "easy-translate",
   "version": "0.0.1",
-  "description": "A very simple translation library for node.js",
+  "description": "A very simple translation library in commonjs format",
   "main": "./index.js",
   "scripts": {
     "test": "npm run jshint && npm run jscs && npm run tslint && npm run mocha",
     "mocha": "mocha index.spec.js",
     "jscs": "jscs .",
     "jshint": "jshint --exclude ./node_modules,./langs . --verbose",
-    "tslint": "tslint easy-translate.d.ts"
+    "tslint": "if-node-version '>=4' tslint easy-translate.d.ts"
   },
   "typings": "./easy-translate.d.ts",
   "repository": {
@@ -34,6 +34,7 @@
   "homepage": "https://github.com/megahertz/easy-translate#readme",
   "devDependencies": {
     "chai": "*",
+    "if-node-version": "^1.1.1",
     "jscs": "*",
     "jshint": "*",
     "jshint-reporter-jscs": "*",

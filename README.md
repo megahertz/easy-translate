@@ -5,7 +5,7 @@
 
 ## Description
 
-A very simple translation library for node.js. It uses the same approach
+A very simple translation library in commonjs format. It uses the same approach
 as Yii 1 and Drupal.
 
 ## Installation
