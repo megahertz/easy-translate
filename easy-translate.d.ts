@@ -17,9 +17,8 @@ export interface ITranslate {
   load(data: ITranslations): void;
 }
 
-const t: ITranslate;
+declare const t: ITranslate;
 export default t;
-export = t;
 
 export function language(lang?: string): string | void;
 export function load(data: ITranslations): void;
