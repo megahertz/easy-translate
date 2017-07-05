@@ -35,12 +35,14 @@ function t(message, params) {
     message = applyParams(message, args);
   } else if (typeof params === 'object') {
     message = applyParams(message, params);
-  } else if (typeof params === 'number' && -1 !== message.indexOf('|')) {
+  } else if (typeof params === 'number' && message.indexOf('|') > -1) {
     message = applyPluralForm(
       message,
       params,
       translations[currentLang].plural || translations.en.plural
     );
+  } else if (arguments.length === 2 && message.indexOf('{0}') > -1) {
+    message = applyParams(message, [params]);
   }
 
   if (message.indexOf('{n}') > -1) {

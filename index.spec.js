@@ -46,6 +46,7 @@ describe('easy-translate', function() {
 
   it('should replace a {n} placeholder', function() {
     expect(t('a {n}', 'ball')).to.equals('a ball');
+    expect(t('number {n}', 3)).to.equals('number 3');
   });
 
   it('should use another category', function() {
@@ -55,5 +56,7 @@ describe('easy-translate', function() {
   it('should replace positional placeholders', function() {
     expect(t('usage of {0} {1}', 'position', 'placeholders'))
       .to.equals('использование position placeholders');
+
+    expect(t('get {0}', 'value')).to.equal('get value');
   });
 });
