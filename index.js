@@ -16,7 +16,7 @@ module.exports = t;
 function t(message, params) {
   /* jshint -W074 */
   var category = (params && params._category) || 'app';
-  var lang = (params && params._lang) || currentLang;
+  var lang     = (params && params._lang)     || currentLang;
 
   translations[lang] = translations[lang] || {};
 
@@ -27,30 +27,15 @@ function t(message, params) {
     message = translations[lang][category][message];
   }
 
-  if (undefined === params) {
+  if (params === undefined) {
     return message;
   }
 
   if (arguments.length > 2) {
-    var args = Array.prototype.splice.call(arguments, 1);
-    message = applyParams(message, args);
-  } else if (typeof params === 'object') {
-    message = applyParams(message, params);
-  } else if (typeof params === 'number' && message.indexOf('|') > -1) {
-    message = applyPluralForm(
-      message,
-      params,
-      translations[lang].plural || translations.en.plural
-    );
-  } else if (arguments.length === 2 && message.indexOf('{0}') > -1) {
-    message = applyParams(message, [params]);
+    params = Array.prototype.splice.call(arguments, 1);
   }
 
-  if (message.indexOf('{n}') > -1) {
-    message = message.replace('{n}', params);
-  }
-
-  return message;
+  return message.replace(/{([^}]+)}/g, template(lang, params));
 }
 
 function load(data) {
@@ -94,24 +79,44 @@ function language(lang) {
   return currentLang;
 }
 
-function applyParams(message, params) {
-  for (var i in params) {
-    if (!params.hasOwnProperty(i)) {
-      continue;
+function template(lang, params) {
+  return function matcher(match, body) {
+    var value = resolveVariable(body, params);
+    if (value !== undefined) {
+      return value;
     }
 
-    message = message.replace(new RegExp('\\{' + i + '\\}', 'g'), params[i]);
-  }
+    // {n|dog|dogs}
+    if (body.indexOf('|') > -1) {
+      var chunks = body.split('|');
+      var variable = chunks.shift();
+      var pluralRule = translations[lang].plural || translations.en.plural;
+      var number = resolveVariable(variable, params) || 0;
+      return chunks[pluralRule(number) || 0];
+    }
 
-  return message;
+    // If no mappings return the source substring
+    return '{' + body + '}';
+  };
 }
 
-function applyPluralForm(message, number, rules) {
-  var chunks = Array.isArray(message) ? message : message.split('|');
-  var result = chunks[rules(number)];
-  if (undefined === result) {
-    result = chunks[0];
+function resolveVariable(variableName, params) {
+  // {0} when param is not an array
+  if (variableName === '0' && !isArray(params)) {
+    return params;
   }
 
-  return result;
+  // {0} {1} {var_name}
+  if (params[variableName] !== undefined) {
+    return params[variableName];
+  }
+
+  // {s} {n}
+  if (variableName === 's' || variableName === 'n') {
+    return params;
+  }
+}
+
+function isArray(r) {
+  return Object.prototype.toString.call(r) === '[object Array]';
 }

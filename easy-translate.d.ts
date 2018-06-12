@@ -1,5 +1,6 @@
 export interface IOptions {
   _category?: string;
+  _lang?: string;
 }
 
 export interface ITranslations {
@@ -12,7 +13,7 @@ export interface ITranslations {
 type Options = IOptions | number | any;
 
 export interface ITranslate {
-  (message: string, options?: Options, ...positional: any[]): string;
+  (message: string, options?: Options | any, ...positional: any[]): string;
   language(lang?: string): string | void;
   load(data: ITranslations): void;
 }
