@@ -39,6 +39,7 @@ describe('easy-translate', function() {
   });
 
   it('should use plurals', function() {
+    expect(t('{n} ball|{n} balls', 0)).to.equals('0 мячей');
     expect(t('{n} ball|{n} balls', 1)).to.equals('1 мяч');
     expect(t('{n} ball|{n} balls', 2)).to.equals('2 мяча');
     expect(t('{n} ball|{n} balls', 5)).to.equals('5 мячей');

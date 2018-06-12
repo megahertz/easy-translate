@@ -16,14 +16,15 @@ module.exports = t;
 function t(message, params) {
   /* jshint -W074 */
   var category = (params && params._category) || 'app';
+  var lang = (params && params._lang) || currentLang;
 
-  translations[currentLang] = translations[currentLang] || {};
+  translations[lang] = translations[lang] || {};
 
   if (
-    translations[currentLang][category] &&
-    translations[currentLang][category][message])
+    translations[lang][category] &&
+    translations[lang][category][message])
   {
-    message = translations[currentLang][category][message];
+    message = translations[lang][category][message];
   }
 
   if (undefined === params) {
@@ -39,7 +40,7 @@ function t(message, params) {
     message = applyPluralForm(
       message,
       params,
-      translations[currentLang].plural || translations.en.plural
+      translations[lang].plural || translations.en.plural
     );
   } else if (arguments.length === 2 && message.indexOf('{0}') > -1) {
     message = applyParams(message, [params]);

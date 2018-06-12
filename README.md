@@ -29,7 +29,7 @@ console.log(t('This library can be found at {url}.', {
 
 var count = Object.kesy(package.dependencies).length;
 var depText = t('{n} dependency|{n} dependencies', count);
-console.log(t('It has {depCount}.', depText);
+console.log(t('It has {n}.', depText);
 console.log(t('The current lanugage is {n}.', t.language());
 ```
 
