@@ -38,7 +38,7 @@
     "jscs": "*",
     "jshint": "*",
     "jshint-reporter-jscs": "*",
-    "mocha": "*",
+    "mocha": "3.4.2",
     "rewire": "*",
     "tslint": "*",
     "typescript": "*"
